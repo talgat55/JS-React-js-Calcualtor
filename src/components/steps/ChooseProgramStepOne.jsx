@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import TabContent from "../TabContent";
 import Button from "../Button";
 import {connect} from 'react-redux';
-import {setProgram, setTermPeriod, setTotalSum} from "../../redux/actions";
+import {setIncrementCurrentStep, setProgram, setTermPeriod, setTotalSum} from "../../redux/actions";
 
 const ChooseProgramStepOne = (props) => {
     const [programs, setPrograms] = useState('');
@@ -31,6 +31,7 @@ const ChooseProgramStepOne = (props) => {
         props.setProgram(programs);
         props.setTotalSum(total_sum);
         props.setTermPeriod(term_period);
+        props.setIncrementCurrentStep( props.currentStep +1)
 
     };
 
@@ -102,7 +103,12 @@ const ChooseProgramStepOne = (props) => {
 const mapDispatchToProps = {
     setProgram,
     setTotalSum,
-    setTermPeriod
+    setTermPeriod,
+    setIncrementCurrentStep
 };
-
-export default connect(null, mapDispatchToProps)(ChooseProgramStepOne);
+const mapStateToProps = state => {
+    return {
+        currentStep: state.currentStep,
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ChooseProgramStepOne);
