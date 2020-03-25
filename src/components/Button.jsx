@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default ({children}) => {
+export default ({children, onClick}) => {
     return (
-        <ButtonComponent>
+        <ButtonComponent onClick={onClick}>
             {children}
         </ButtonComponent>
     )
