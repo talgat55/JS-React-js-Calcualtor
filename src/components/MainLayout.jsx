@@ -1,30 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
+import {connect} from 'react-redux';
 import NavItem from "./NavItem";
-import ChooseProgramStepOne from "./steps/ChooseProgramStepOne";
+import StepTemplate from "./steps/StepTemplate";
 
-export default ({nav, sidebar}) => {
-    return (
-        <MainLayoutBlock>
-            <ul className="nav">
-                {
-                    nav.map(item => (
-                        <NavItem
-                            key={item.id}
-                            id={item.id}
-                            title={item.name}
-                            description={item.description}
-                        />))
-                }
-            </ul>
-            <div className="tab-content">
-                <ChooseProgramStepOne/>
+const MainLayout = ({currentStep,nav}) => {
 
-            </div>
-        </MainLayoutBlock>
-    )
-};
-
+        return (
+            <MainLayoutBlock>
+                <ul className="nav">
+                    {
+                        nav.map(item => (
+                            <NavItem
+                                key={item.id}
+                                id={item.id}
+                                count={item.id}
+                                title={item.name}
+                                description={item.description}
+                            />))
+                    }
+                </ul>
+                <div className="tab-content">
+                    <StepTemplate
+                        currentStep={currentStep}
+                    />
+                </div>
+            </MainLayoutBlock>
+        )
+    }
+;
 const MainLayoutBlock = styled.section`
   .nav{
     display: flex;
@@ -57,9 +61,10 @@ const MainLayoutBlock = styled.section`
     width: 100%;
     .tab-item{
       display: flex;
-      width: 100%;
+      width: 100vw!important;
+    
       .sidebar{
-        width: 30%;
+        width: 18%;
         padding: 20px 30px 20px 20px; 
         
         select{
@@ -92,3 +97,11 @@ const MainLayoutBlock = styled.section`
   }
 
 `;
+const mapStateToProps = state => {
+    return {
+        currentStep: state.app.currentStep,
+    };
+};
+export default connect(mapStateToProps, null)(MainLayout);
+
+

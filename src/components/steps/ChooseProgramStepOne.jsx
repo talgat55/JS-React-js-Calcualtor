@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
+import {connect} from 'react-redux';
 import TabContent from "../TabContent";
 import Button from "../Button";
-import {connect} from 'react-redux';
 import {setIncrementCurrentStep, setProgram, setTermPeriod, setTotalSum} from "../../redux/actions";
 
 const ChooseProgramStepOne = (props) => {
